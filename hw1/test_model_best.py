@@ -176,24 +176,51 @@ class Linear_Regression():
         test_Y = np.matmul(test_X,self.best_W)
         return test_Y
 
+def extract_features(train_X,extract_features_list):
+    attrs = ['AMB', 'CH4', 'CO', 'NMHC', 'NO', 'NO2',
+            'NOx', 'O3', 'PM10', 'PM2.5', 'RAINFALL', 'RH',
+            'SO2', 'THC', 'WD_HR', 'WIND_DIR', 'WIND_SPEED', 'WS_HR']
+    tmp = [i for i in range(len(attrs))]
+    attr_dict = {attrs[i]:tmp[i] for i in range(len(attrs))}
+
+    extract_ind_list = [attr_dict[feature] for feature in extract_features_list]
+    print(extract_ind_list)
+
+    X_shape = train_X.shape
+    part_train_X = []
+    for data in train_X:
+        data_part = data[:-1].reshape(18,-1)[extract_ind_list]
+        data_part = data_part.reshape(-1)
+        data_part = np.concatenate((data_part,np.ones(1)),axis=None)
+        part_train_X.append(data_part)
+    train_X = np.array(part_train_X)
+    return train_X
+
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("inputfile", help="input file path")
     parser.add_argument("outputfile", help="output file path")
-    parser.add_argument("modelpath", help="modelpath path")
+    parser.add_argument("modelpath", help="model path")
     args = parser.parse_args()
     print(args.inputfile)
     print(args.outputfile)
 
     paras = load_model(args.modelpath)
-    model = Linear_Regression(paranum=163, paras=paras)
+    model = Linear_Regression(paranum=64, paras=paras)
 
     test_X = load_test(args.inputfile)
     print('test_X raw {}'.format(test_X.shape))
 
-    mean,std = get_normalize('scale/normalize_hw1.txt')
-    test_X = (test_X-mean)/std
+    #mean,std = get_normalize('scale/normalize_hw1.txt')
+    #test_X = (test_X-mean)/std
+
+    
+
+    extract_features_list = ['CH4', 'CO', 'NO2', 'O3', 'PM10', 'PM2.5', 'SO2']
+
+    test_X = extract_features(test_X,extract_features_list)
 
     test_Y = model.test(test_X)
+
     write_csv(test_Y,args.outputfile)
 
