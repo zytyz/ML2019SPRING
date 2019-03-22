@@ -1,0 +1,2 @@
+python arrangedata.py -arr_train_X_path arr_train_X.csv -arr_test_X_path arr_test_X.csv -train_raw_path $1 -test_raw_path $2 -train_X_path $3 -train_Y_path $4  -test_X_path $5 -ans_path $6
+python submit_best.py -use_val -new_data -model deep -test -reload 126 -arr_train_X_path arr_train_X.csv -arr_test_X_path arr_test_X.csv -train_raw_path $1 -test_raw_path $2 -train_X_path $3 -train_Y_path $4  -test_X_path $5 -ans_path $6
