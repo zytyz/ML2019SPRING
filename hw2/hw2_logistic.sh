@@ -1,0 +1,1 @@
+python submit_logistic.py -test -norm_way No -reload 5 -train_raw_path $1 -test_raw_path $2 -train_X_path $3 -train_Y_path $4  -test_X_path $5 -ans_path $6
