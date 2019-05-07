@@ -12,7 +12,7 @@ print(args)
 model = load_model('ckpt/ckpt'+str(args.modelnum)+'.h5')
 if args.modelnum==17:
 	p = Preprocess(max_sentence_len=50,dim=128)
-	_, x_test = p.getBOWdata()
+	x_test = p.gettestBOWdata()
 elif args.modelnum==18:
 	p = Preprocess(max_sentence_len=100,dim=128)
 	_, x_test = p.getCHARdata()
