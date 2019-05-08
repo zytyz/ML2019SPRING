@@ -5,6 +5,7 @@ DICT=$4
 mkdir data
 python preprocess_train.py -xt $XTEST -xtr $XTRAIN -ytr $YTRAIN -dict $DICT
 mkdir ckpt
+mkdir log
 python train.py -num 11 -reload 11
 python train.py -num 12 -reload 12
 python train.py -num 13 -reload 13
