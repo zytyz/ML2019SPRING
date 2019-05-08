@@ -7,7 +7,7 @@ from multiprocessing import Pool
 import argparse
 
 class Preprocess():
-	def __init__(self,max_sentence_len,dim,doc=None,train_x_path='data/train_x.csv',test_path='data/test_x.csv',train_y_path='data/train_y.csv'):
+	def __init__(self,max_sentence_len,dim,doc=None,train_x_path='data/train_x.csv',test_path='data/test_x.csv',train_y_path='data/train_y.csv',dict_path='data/dict.txt.big'):
 		self.max_sentence_len = max_sentence_len
 		self.dim = dim
 		if doc is not None:
@@ -15,6 +15,7 @@ class Preprocess():
 		self.train_x_path = train_x_path
 		self.test_path = test_path
 		self.train_y_path = train_y_path
+		jieba.load_userdict(dict_path) 
 
 	def tokenize(self,sen):
 		x = jieba.lcut(sen)
@@ -254,7 +255,7 @@ class Preprocess():
 		x_test = pool.map(self.sen2vec,x_test_sen)
 		x_test = np.array(x_test)	
 		print(x_test.shape)
-		np.save('data/y_train.npy',y_train)
+		#np.save('data/y_train.npy',y_train)
 		if self.dim!=128:
 			np.save('data/x_test_len'+str(self.max_sentence_len)+'_dim'+str(self.dim)+'.npy',x_test)
 		else:
@@ -305,9 +306,9 @@ class Preprocess():
 		print('vocab size {}'.format(vocab_size))
 		print('emdedding size {}'.format(emdedding_size))
 
-		'''for word in ['女子', '台南', '學校','白痴','有錢','unk','pad']:
+		for word in ['女子', '台南', '學校','白痴','有錢','unk','pad']:
 		  most_similar = ', '.join('%s (%.2f)' % (similar, dist) for similar, dist in self.word_model.most_similar(word)[:8])
-		  print('  %s -> %s' % (word, most_similar))'''
+		  print('  %s -> %s' % (word, most_similar))
 
 		x_train_sen = x_train
 		x_test_sen = x_test
@@ -411,10 +412,8 @@ if __name__ == '__main__':
 	parser.add_argument('-dict',type=str,default='data/dict.txt.big')
 	args = parser.parse_args()
 
-	jieba.load_userdict(args.dict) 
-
-	p = Preprocess(max_sentence_len=50,dim=128,train_x_path=args.xtr,train_y_path=args.xt,test_path=args.ytr)
+	p = Preprocess(max_sentence_len=50,dim=128,train_x_path=args.xtr,train_y_path=args.ytr,test_path=args.xt,dict_path=args.dict)
 	p.gettestdata()
-	p = Preprocess(max_sentence_len=30,dim=50,train_x_path=args.xtr,train_y_path=args.xt,test_path=args.ytr)
+	p = Preprocess(max_sentence_len=30,dim=50,train_x_path=args.xtr,train_y_path=args.ytr,test_path=args.xt,dict_path=args.dict)
 	p.gettestdata()
 

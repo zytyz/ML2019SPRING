@@ -6,12 +6,14 @@ from preprocess import Preprocess
 parser = argparse.ArgumentParser()
 parser.add_argument('-num','--modelnum',type=int)
 parser.add_argument('-test_data',type=str,default='data/x_test_embed.npy')
+parser.add_argument('-xt',type=str)
+parser.add_argument('-dict',type=str,default='data/dict.txt.big')
 args = parser.parse_args()
 print(args)
 
 model = load_model('ckpt/ckpt'+str(args.modelnum)+'.h5')
 if args.modelnum==17:
-	p = Preprocess(max_sentence_len=50,dim=128)
+	p = Preprocess(max_sentence_len=50,dim=128,test_path=args.xt,dict_path=args.dict)
 	x_test = p.gettestBOWdata()
 elif args.modelnum==18:
 	p = Preprocess(max_sentence_len=100,dim=128)
