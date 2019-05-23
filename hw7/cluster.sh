@@ -1,0 +1,1 @@
+python ta_train.py -num 10 --reload 10 --image_dir $1 --test_case $2 --output_name $3
