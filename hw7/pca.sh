@@ -1,0 +1,1 @@
+python eigenface.py svd $1 $2 $3
