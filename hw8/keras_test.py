@@ -105,7 +105,7 @@ model.set_weights(w)
 predict = model.predict(x_test)
 y_test = np.argmax(predict, axis = 1)
 
-if args.outpath not None:
+if args.outpath is not None:
 	path = args.outpath
 else:
 	path = 'ans/ans_'+str(args.modelnum)+'.csv' 
