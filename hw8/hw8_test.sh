@@ -1,0 +1,1 @@
+python keras_test.py -num 104 -drop -com -testpath $1 -outpath $2
