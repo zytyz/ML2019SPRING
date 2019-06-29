@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 from model.net import ConvLayer, UpsampleConvLayer, ResidualBlock
 import torch.nn.functional as F
-from model.attenconv.py import AttenConvLayer
 
 class MeanShift(nn.Conv2d):
     def __init__(self, rgb_range, rgb_mean, sign):
