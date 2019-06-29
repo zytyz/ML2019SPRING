@@ -42,22 +42,9 @@ def arguments(sp):
         img_fold_B = os.path.join(args.fold_B, '_'.join([sp.split('_')[0], sp.split('_')[1], 'GT' + '.' + sp.split('_')[-1].split('.')[-1]]))
     elif args.phase == 'test_indoor' or args.phase == 'test_outdoor':
         img_fold_B = os.path.join(args.fold_B, sp)
-    #for flip in [0, 1, 2]:
-        #for degree in [0, 1, 2, 3]:
-
+   
     im_A = np.asarray(Image.open(img_fold_A))
     im_B = np.asarray(Image.open(img_fold_B))
-
-    '''if flip == 1:
-        im_A = np.flip(im_A, 0)
-        im_B = np.flip(im_B, 0)
-    if flip == 2:
-        im_A = np.flip(im_A, 1)
-        im_B = np.flip(im_B, 1)
-
-    if degree != 0:
-        im_A = rotate(im_A, 90 * degree)
-        im_B = rotate(im_B, 90 * degree)'''
 
     h, w, c = im_A.shape
 
