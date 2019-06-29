@@ -55,12 +55,11 @@ def arguments(sp):
                 patch_A = im_A[x:x + fix_size, y:y + fix_size]
                 patch_B = im_B[x:x + fix_size, y:y + fix_size]
 
-                if args.phase == 'train':
-                    imsave("%s/data/%d_%s.png" % (folder, count_im, '_'.join(sp.split('_')[:-1])), patch_A)
-                    imsave("%s/label/%d_%s.png" % (folder, count_im, '_'.join(sp.split('_')[:-1])), patch_B)
-                elif args.phase == 'test_indoor' or args.phase == 'test_outdoor':
-                    imsave("%s/data/%d_%s.png" % (folder, count_im, sp[:-4] ), patch_A)
-                    imsave("%s/label/%d_%s.png" % (folder, count_im, sp[:-4] ), patch_B)
+                #imsave("%s/data/%d_%s.png" % (folder, count_im, '_'.join(sp.split('_')[:-1])), patch_A)
+                #imsave("%s/label/%d_%s.png" % (folder, count_im, '_'.join(sp.split('_')[:-1])), patch_B)
+                
+                imsave("%s/data/%d_%s.png" % (folder, count_im, sp[:-4] ), patch_A)
+                imsave("%s/label/%d_%s.png" % (folder, count_im, sp[:-4] ), patch_B)
 
                 count_im += 1
     print("Process %s for %d" % (sp, count_im))
