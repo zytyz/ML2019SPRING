@@ -11,7 +11,7 @@ ML final
 1. split Training images and Validation images into different directories
 2. run the code (the result model will be in checkpoints/)
 ```bash
-bash train.sh <Path to training hazy images> <Path to training GT images> <Path to test hazy images> <Path to test GT images> <Number of available GPUs>
+bash train.sh <Path to training hazy images> <Path to training GT images> <Path to testing hazy images> <Path to testing GT images> <Number of available GPUs>
 ```
 
 ## How to reproduce
