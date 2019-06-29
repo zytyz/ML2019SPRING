@@ -1,7 +1,3 @@
----
-title: 'ML final README'
-disqus: hackmd
----
 
 ML final
 ===
