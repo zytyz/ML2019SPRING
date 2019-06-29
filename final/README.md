@@ -7,10 +7,16 @@ ML final
 2. python requirements are in requirements.txt
 3. matlab
 
+## Train
+1. split Training images and Validation images into different directories
+2. run the code (the result model will be in checkpoints/)
+```bash
+bash train.sh <Path to training hazy images> <Path to training GT images> <Path to test hazy images> <Path to test GT images> <Number of available GPUs>
+```
 
 ## How to reproduce
 
-dowload models and code:
+download models and code:
 ```bash
 bash download.sh
 ```
